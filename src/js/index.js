@@ -1,18 +1,18 @@
 
 
-var meals = []
-var mealsByLetter = []
-var toggle = 0
-var details = []
-var ids = "52772"
-var searchName = ""
-var searchLetter = "s"
-var Categories = []
-var areas = []
-var Ingredients = []
-var mealName = "Seafood"
-var mealArea = "Canadian"
-var mealIngredients = "chicken_breast"
+let meals = []
+let mealsByLetter = []
+let toggle = 0
+let details = []
+let ids = "52772"
+let searchName = ""
+let searchLetter = "s"
+let Categories = []
+let areas = []
+let Ingredients = []
+let mealName = "Seafood"
+let mealArea = "Canadian"
+let mealIngredients = "chicken_breast"
 
 
 // navbar animations
