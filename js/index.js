@@ -61,7 +61,7 @@ async function getMeals() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?${searchLetter}=${searchName}`)
   var response = await api.json()
   meals = response.meals
- 
+
 
   $(".load").addClass("d-none")
 
@@ -72,11 +72,11 @@ function displayMeals() {
   var cat = ""
   var meal = ""
   if (meals != null) {
-    
+
     for (let i = 0; i < meals.length; i++) {
       if (meals[i].strCategory != undefined) {
         cat = meals[i].strCategory
-      }else{
+      } else {
         cat = ""
       }
       meal += `<div ids="${meals[i].idMeal}" class="col-xl-3 col-lg-4 col-md-6 rounded-3 pointer">
@@ -95,9 +95,9 @@ function displayMeals() {
       
       </div>
   </div>`
-  
+
     }
-  }else if (meals == null) {
+  } else if (meals == null) {
     meal = ` <div class="container">
     <div class="row">
     <div class="col-md-2"></div>
@@ -120,12 +120,12 @@ function displayMeals() {
 // get and display detalis id the meal
 
 async function getDetiels() {
-$(".load").removeClass("d-none")
+  $(".load").removeClass("d-none")
 
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${ids}`)
   var response = await api.json()
   details = response.meals
-  
+
   $(".load").addClass("d-none")
 }
 function displayDetiels() {
@@ -149,7 +149,7 @@ function displayDetiels() {
 
 
   for (let i = 1; i < 20; i++) {
-    if (details[0]["strIngredient" + i] == "" || details[0]["strMeasure" + i] == "" ) {
+    if (details[0]["strIngredient" + i] == "" || details[0]["strMeasure" + i] == "") {
 
       recipes += ""
     } else {
@@ -184,7 +184,7 @@ async function getCategories() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
   var response = await api.json()
   Categories = response.categories
-  
+
 
 
 
@@ -212,7 +212,8 @@ async function getCategories() {
 
   $(".cards").click((e) => {
     mealName = e.target.getAttribute("Category")
-    
+    $(window).scrollTop("0")
+
 
     getAllCat()
 
@@ -232,7 +233,8 @@ $(".p2").click(() => {
   $("#contact").addClass("d-none")
   $("#meals").removeClass("d-none")
   $(".detiels").addClass("d-none")
-  $(".load").css({"top" : "0"})
+  $(".load").css({ "top": "0" })
+  $(window).scrollTop("0")
   closeNav()
 
 })
@@ -245,7 +247,7 @@ async function FilterByCategory() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealName}`)
   var response = await api.json()
   meals = response.meals
- 
+
 
 
   $(".load").addClass("d-none")
@@ -266,7 +268,9 @@ async function getAllCat() {
     $(".detiels").removeClass("d-none")
     $("#meals").addClass("d-none")
     $(".search").addClass("d-none")
-    $(".load").css({"top" : "0"})
+    $(".load").css({ "top": "0" })
+    $(window).scrollTop("0")
+
 
     getAll2()
 
@@ -296,7 +300,7 @@ async function getAreas() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
   var response = await api.json()
   areas = response.meals
- 
+
 
 
   var meal = ""
@@ -320,7 +324,8 @@ async function getAreas() {
 
   $(".cards").click((e) => {
     mealArea = e.target.getAttribute("area")
-    
+    $(window).scrollTop("0")
+
     getAllAreas()
   })
 
@@ -333,7 +338,8 @@ $(".p3").click(() => {
   $("#contact").addClass("d-none")
   $("#meals").removeClass("d-none")
   $(".detiels").addClass("d-none")
-  $(".load").css({"top" : "0"})
+  $(".load").css({ "top": "0" })
+  $(window).scrollTop("0")
   closeNav()
 
 })
@@ -346,7 +352,7 @@ async function FilterByArea() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${mealArea}`)
   var response = await api.json()
   meals = response.meals
-  
+
   $(".load").addClass("d-none")
 
 }
@@ -365,7 +371,8 @@ async function getAllAreas() {
     $(".detiels").removeClass("d-none")
     $("#meals").addClass("d-none")
     $(".search").addClass("d-none")
-    $(".load").css({"top" : "0"})
+    $(".load").css({ "top": "0" })
+    $(window).scrollTop("0")
 
     getAll2()
 
@@ -398,20 +405,20 @@ async function getIngredients() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
   var response = await api.json()
   Ingredients = response.meals
-  
+
 
 
   var meal = ""
 
   for (let i = 0; i < Ingredients.length; i++) {
-    
+
     meal += `<div class="col-xl-3 col-lg-4 col-md-6 rounded-3 pointer text-white text-center">
 
     <div Ingredients="${Ingredients[i].strIngredient}" class="cards position-relative overflow-hidden p-0">
     <i Ingredients="${Ingredients[i].strIngredient}" class="fa-solid fa-bowl-food fs-10 text-white-50"></i>
     
     <h2  Ingredients="${Ingredients[i].strIngredient}" class="ms-2">${Ingredients[i].strIngredient}</h2>
-    <p Ingredients="${Ingredients[i].strIngredient}">${Ingredients[i].strDescription!=null? Ingredients[i].strDescription.split(" ").slice(0, 20).join(" ") : ""}</p>
+    <p Ingredients="${Ingredients[i].strIngredient}">${Ingredients[i].strDescription != null ? Ingredients[i].strDescription.split(" ").slice(0, 20).join(" ") : ""}</p>
     
     
     </div>
@@ -424,6 +431,7 @@ async function getIngredients() {
 
   $(".cards").click((e) => {
     mealIngredients = e.target.getAttribute("Ingredients")
+    $(window).scrollTop("0")
     getAllIngredients()
   })
 
@@ -436,7 +444,8 @@ $(".p4").click(() => {
   $("#contact").addClass("d-none")
   $("#meals").removeClass("d-none")
   $(".detiels").addClass("d-none")
-  $(".load").css({"top" : "0"})
+  $(".load").css({ "top": "0" })
+  $(window).scrollTop("0")
   closeNav()
 
 })
@@ -469,7 +478,8 @@ async function getAllIngredients() {
     $(".detiels").removeClass("d-none")
     $("#meals").addClass("d-none")
     $(".search").addClass("d-none")
-    $(".load").css({"top" : "0"})
+    $(".load").css({ "top": "0" })
+    $(window).scrollTop("0")
 
     getAll2()
 
@@ -510,7 +520,8 @@ async function getAll() {
     $(".detiels").removeClass("d-none")
     $("#meals").addClass("d-none")
     $(".search").addClass("d-none")
-    $(".load").css({"top" : "0"})
+    $(".load").css({ "top": "0" })
+    $(window).scrollTop("0")
 
     getAll2()
 
@@ -536,7 +547,8 @@ $(".p1").click(() => {
   $(".detiels").addClass("d-none")
   $("#meals").removeClass("d-none")
   $("#contact").addClass("d-none")
-  $(".load").css({"top" : $("#meals").offset().top})
+  $(".load").css({ "top": $("#meals").offset().top })
+  $(window).scrollTop("0")
 
   closeNav()
 })
@@ -555,12 +567,17 @@ function searchByletter(index) {
   searchName = index
   if (searchName == "") {
     searchLetter = "s"
-  }else{
+  } else {
     searchLetter = "f"
   }
   $("#Name").val("")
+  
+  if ($("#letter").val().length > 1) {
+    $("#letter").blur()
+  }
   getAll()
 }
+
 
 //---------------------------------------- end of search functions ---------------------------------------
 
@@ -571,13 +588,13 @@ $(".p5").click(() => {
   $("#meals").addClass("d-none")
   $("#contact").removeClass("d-none")
   $(".detiels").addClass("d-none")
-  $(".load").css({"top" : "0"})
+  $(".load").css({ "top": "0" })
   closeNav()
 
 })
 
 
-
+//--------------------------- contact rejex ------------------------------------
 
 
 const inputs = $('#contact input');
@@ -594,61 +611,56 @@ const ageRegex = /^[1-9]{1}[0-9]{0,1}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
 
 const regexMap = {
-    'name' : nameRegex,
-    'email' : emailRegex,
-    'phone' : phoneRegex,
-    'age' : ageRegex,
-    'password' : passwordRegex,
+  'name': nameRegex,
+  'email': emailRegex,
+  'phone': phoneRegex,
+  'age': ageRegex,
+  'password': passwordRegex,
 }
 
-function validHandler(elem)
-{
-    elem.removeClass('non-valid');
-    elem.addClass('valid');
-    elem.next().slideUp()
-    elem.parent().children('i').eq(1).fadeOut()
-    elem.parent().children('i').eq(0).fadeIn()
-    $('#contact button').removeClass("disabled")
+function validHandler(elem) {
+  elem.removeClass('non-valid');
+  elem.addClass('valid');
+  elem.next().slideUp()
+  elem.parent().children('i').eq(1).fadeOut()
+  elem.parent().children('i').eq(0).fadeIn()
+  $('#contact button').removeClass("disabled")
 }
 
-function nonValidHandler(elem)
-{
-    elem.removeClass('valid');
-    elem.addClass('non-valid');
-    elem.next().slideDown()
-    elem.parent().children('i').eq(0).fadeOut()
-    elem.parent().children('i').eq(1).fadeIn()
-    $('#contact button').addClass("disabled")
+function nonValidHandler(elem) {
+  elem.removeClass('valid');
+  elem.addClass('non-valid');
+  elem.next().slideDown()
+  elem.parent().children('i').eq(0).fadeOut()
+  elem.parent().children('i').eq(1).fadeIn()
+  $('#contact button').addClass("disabled")
 
 }
 
 
-inputs.on('input',(elem)=>
-{
-    const input = $(elem.target);
+inputs.on('input', (elem) => {
+  const input = $(elem.target);
 
-    if( input.attr('name') === 'repassword' || input.attr('name') === 'password' )
-    {
-        if( passwordInput.val() === repasswordInput.val() ){ console.log('in 1');  validHandler(repasswordInput);  }
-        else{ console.log('in 2');  nonValidHandler(repasswordInput);  }
-        if( input.attr('name') === 'repassword'){ return; }
-    }
+  if (input.attr('name') === 'repassword' || input.attr('name') === 'password') {
+    if (passwordInput.val() === repasswordInput.val()) { console.log('in 1'); validHandler(repasswordInput); }
+    else { console.log('in 2'); nonValidHandler(repasswordInput); }
+    if (input.attr('name') === 'repassword') { return; }
+  }
 
-    if(regexMap[input.attr('name')].test(elem.target.value) ){   validHandler(input);  }
-    else{   nonValidHandler(input);  }
+  if (regexMap[input.attr('name')].test(elem.target.value)) { validHandler(input); }
+  else { nonValidHandler(input); }
 
 });
 
-submitBtn.on('click',function(){
+submitBtn.on('click', function () {
 
-    const checks = $('.fa-check');
+  const checks = $('.fa-check');
 
-    for (let i = 0; i < checks.length; i++) 
-    {
-        if( checks.eq(i).css('display') === 'none' ){
-          
-         }
+  for (let i = 0; i < checks.length; i++) {
+    if (checks.eq(i).css('display') === 'none') {
+
     }
+  }
 
 
 });
