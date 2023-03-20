@@ -143,13 +143,13 @@ function displayDetiels() {
   document.querySelector(".mainDetails").innerHTML = `<img class="w-100 rounded-3 " src="${details[0].strMealThumb}" alt="">
    <h2 class="m-2">${details[0].strMeal}</h2>`
 
-  document.querySelector(".Instructions").innerHTML = ` <p class="">${details[0].strInstructions} </p>
+  document.querySelector(".Instructions").innerHTML = ` <p class="ps-2">${details[0].strInstructions} </p>
    <h3>Area : ${details[0].strArea}</h3>
    <h3>Category : ${details[0].strCategory}</h3>`
 
 
   for (let i = 1; i < 20; i++) {
-    if (details[0]["strIngredient" + i] == "" || details[0]["strMeasure" + i] == "") {
+    if (details[0]["strIngredient" + i] == "" | details[0]["strMeasure" + i] == "" || details[0]["strIngredient" + i] == null | details[0]["strMeasure" + i] == null) {
 
       recipes += ""
     } else {
