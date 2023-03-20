@@ -61,7 +61,7 @@ async function getMeals() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?${searchLetter}=${searchName}`)
   var response = await api.json()
   meals = response.meals
-  console.log(meals);
+ 
 
   $(".load").addClass("d-none")
 
@@ -69,26 +69,48 @@ async function getMeals() {
 
 function displayMeals() {
 
-
+  var cat = ""
   var meal = ""
-
-  for (let i = 0; i < meals.length; i++) {
-    meal += `<div ids="${meals[i].idMeal}" class="col-xl-3 col-lg-4 col-md-6 rounded-3 pointer">
-
-    <div ids="${meals[i].idMeal}" class="cards position-relative overflow-hidden p-0">
-
+  if (meals != null) {
     
-    <div ids="${meals[i].idMeal}" class="layer bg-gray w-100 h-100 position-absolute d-flex justify-content-start align-items-center rounded-3">
-    <h2 ids="${meals[i].idMeal}" class="ms-2">${meals[i].strMeal}</h2>
-    
+    for (let i = 0; i < meals.length; i++) {
+      if (meals[i].strCategory != undefined) {
+        cat = meals[i].strCategory
+      }else{
+        cat = ""
+      }
+      meal += `<div ids="${meals[i].idMeal}" class="col-xl-3 col-lg-4 col-md-6 rounded-3 pointer">
+  
+      <div ids="${meals[i].idMeal}" class="cards position-relative overflow-hidden p-0">
+  
+      
+      <div ids="${meals[i].idMeal}" class="layer bg-gray w-100 h-100 position-absolute d-flex justify-content-start align-items-center rounded-3">
+      <h2 ids="${meals[i].idMeal}" class="ms-2">${meals[i].strMeal}</h2>
+      <span class="badge text-bg-warning position-absolute px-3 py-1 top-0 end-0">${cat}</span>
+      
+      </div>
+      <div class="">
+      <img ids="${meals[i].idMeal}" class="w-100 rounded-3" src="${meals[i].strMealThumb}" alt="">
+      </div>
+      
+      </div>
+  </div>`
+  
+    }
+  }else if (meals == null) {
+    meal = ` <div class="container">
+    <div class="row">
+    <div class="col-md-2"></div>
+      <div class="col-md-8">
+      <img class="w-100 opacity-50" src="img/—Pngtree—vector search result icon material_5766212.png" alt="">
+      </div>
+      <div class="col-md-2"></div>
     </div>
-    <img ids="${meals[i].idMeal}" class="w-100 rounded-3" src="${meals[i].strMealThumb}" alt="">
-    
-    </div>
-</div>`
 
+  </div> `
   }
   document.getElementById("meals").innerHTML = meal
+
 
 
 }
@@ -103,7 +125,7 @@ $(".load").removeClass("d-none")
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${ids}`)
   var response = await api.json()
   details = response.meals
-  console.log(details);
+  
   $(".load").addClass("d-none")
 }
 function displayDetiels() {
@@ -118,16 +140,16 @@ function displayDetiels() {
 
   var tag = ""
 
-  document.querySelector(".mainDetails").innerHTML = `<img class="w-100" src="${details[0].strMealThumb}" alt="">
-   <h2>${details[0].strMeal}</h2>`
+  document.querySelector(".mainDetails").innerHTML = `<img class="w-100 rounded-3 " src="${details[0].strMealThumb}" alt="">
+   <h2 class="m-2">${details[0].strMeal}</h2>`
 
-  document.querySelector(".Instructions").innerHTML = ` <p>${details[0].strInstructions} </p>
+  document.querySelector(".Instructions").innerHTML = ` <p class="">${details[0].strInstructions} </p>
    <h3>Area : ${details[0].strArea}</h3>
    <h3>Category : ${details[0].strCategory}</h3>`
 
 
   for (let i = 1; i < 20; i++) {
-    if (details[0]["strIngredient" + i] == "") {
+    if (details[0]["strIngredient" + i] == "" || details[0]["strMeasure" + i] == "" ) {
 
       recipes += ""
     } else {
@@ -162,7 +184,7 @@ async function getCategories() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
   var response = await api.json()
   Categories = response.categories
-  console.log(Categories);
+  
 
 
 
@@ -190,7 +212,7 @@ async function getCategories() {
 
   $(".cards").click((e) => {
     mealName = e.target.getAttribute("Category")
-    console.log(mealName);
+    
 
     getAllCat()
 
@@ -210,6 +232,7 @@ $(".p2").click(() => {
   $("#contact").addClass("d-none")
   $("#meals").removeClass("d-none")
   $(".detiels").addClass("d-none")
+  $(".load").css({"top" : "0"})
   closeNav()
 
 })
@@ -222,7 +245,7 @@ async function FilterByCategory() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealName}`)
   var response = await api.json()
   meals = response.meals
-  console.log(meals);
+ 
 
 
   $(".load").addClass("d-none")
@@ -243,6 +266,7 @@ async function getAllCat() {
     $(".detiels").removeClass("d-none")
     $("#meals").addClass("d-none")
     $(".search").addClass("d-none")
+    $(".load").css({"top" : "0"})
 
     getAll2()
 
@@ -272,7 +296,7 @@ async function getAreas() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
   var response = await api.json()
   areas = response.meals
-  console.log(areas);
+ 
 
 
   var meal = ""
@@ -296,7 +320,7 @@ async function getAreas() {
 
   $(".cards").click((e) => {
     mealArea = e.target.getAttribute("area")
-    console.log(mealArea);
+    
     getAllAreas()
   })
 
@@ -309,6 +333,7 @@ $(".p3").click(() => {
   $("#contact").addClass("d-none")
   $("#meals").removeClass("d-none")
   $(".detiels").addClass("d-none")
+  $(".load").css({"top" : "0"})
   closeNav()
 
 })
@@ -321,7 +346,7 @@ async function FilterByArea() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${mealArea}`)
   var response = await api.json()
   meals = response.meals
-  console.log(meals);
+  
   $(".load").addClass("d-none")
 
 }
@@ -340,6 +365,7 @@ async function getAllAreas() {
     $(".detiels").removeClass("d-none")
     $("#meals").addClass("d-none")
     $(".search").addClass("d-none")
+    $(".load").css({"top" : "0"})
 
     getAll2()
 
@@ -372,7 +398,7 @@ async function getIngredients() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
   var response = await api.json()
   Ingredients = response.meals
-  console.log(Ingredients);
+  
 
 
   var meal = ""
@@ -398,7 +424,6 @@ async function getIngredients() {
 
   $(".cards").click((e) => {
     mealIngredients = e.target.getAttribute("Ingredients")
-    console.log(mealIngredients);
     getAllIngredients()
   })
 
@@ -411,6 +436,7 @@ $(".p4").click(() => {
   $("#contact").addClass("d-none")
   $("#meals").removeClass("d-none")
   $(".detiels").addClass("d-none")
+  $(".load").css({"top" : "0"})
   closeNav()
 
 })
@@ -424,7 +450,6 @@ async function FilterByIngredients() {
   api = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${mealIngredients}`)
   var response = await api.json()
   meals = response.meals
-  console.log(meals);
 
   $(".load").addClass("d-none")
 
@@ -444,6 +469,7 @@ async function getAllIngredients() {
     $(".detiels").removeClass("d-none")
     $("#meals").addClass("d-none")
     $(".search").addClass("d-none")
+    $(".load").css({"top" : "0"})
 
     getAll2()
 
@@ -484,6 +510,7 @@ async function getAll() {
     $(".detiels").removeClass("d-none")
     $("#meals").addClass("d-none")
     $(".search").addClass("d-none")
+    $(".load").css({"top" : "0"})
 
     getAll2()
 
@@ -509,14 +536,16 @@ $(".p1").click(() => {
   $(".detiels").addClass("d-none")
   $("#meals").removeClass("d-none")
   $("#contact").addClass("d-none")
+  $(".load").css({"top" : $("#meals").offset().top})
+
   closeNav()
 })
 // search by name
 
 function search(index) {
   searchName = index
-  console.log(searchName);
   searchLetter = "s"
+  $("#letter").val("")
   getAll()
 }
 
@@ -524,8 +553,12 @@ function search(index) {
 
 function searchByletter(index) {
   searchName = index
-  console.log(searchName);
-  searchLetter = "f"
+  if (searchName == "") {
+    searchLetter = "s"
+  }else{
+    searchLetter = "f"
+  }
+  $("#Name").val("")
   getAll()
 }
 
@@ -538,6 +571,7 @@ $(".p5").click(() => {
   $("#meals").addClass("d-none")
   $("#contact").removeClass("d-none")
   $(".detiels").addClass("d-none")
+  $(".load").css({"top" : "0"})
   closeNav()
 
 })

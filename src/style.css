@@ -26,7 +26,7 @@ top: 0%;
     
 }
 .w-10{
-    width: 10%;
+    width: 100px;
 }
 
 i{
@@ -51,8 +51,8 @@ i{
 }
 .exit{
     position: absolute;
-    top: 40px;
-    right: 40px;
+    top: 4%;
+    right: 4%;
 }
 .fs-10{
     font-size: 150px;
@@ -60,13 +60,16 @@ i{
 .validation-card{
     display: none;
 }
+.top-10{
+    top: -1%;
+}
 
 
 /* ----------------------- */
 
 .loader {
     border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid rgb(101, 99, 99); /* Blue */
+    border-top: 10px solid rgb(242, 181, 28); /* Blue */
     border-radius: 50%;
     width: 100px;
     height: 100px;
@@ -75,9 +78,11 @@ i{
   }
   .load{
     z-index: 9999;
+    top: 0;
   }
   
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+  
